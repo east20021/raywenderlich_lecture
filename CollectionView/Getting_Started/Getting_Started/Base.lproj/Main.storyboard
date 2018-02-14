@@ -48,9 +48,6 @@
                                             <constraint firstItem="i9t-lq-vxZ" firstAttribute="centerX" secondItem="q3P-up-ciY" secondAttribute="centerX" id="aJV-HP-cLp"/>
                                             <constraint firstItem="i9t-lq-vxZ" firstAttribute="centerY" secondItem="q3P-up-ciY" secondAttribute="centerY" id="i1n-n6-ISx"/>
                                         </constraints>
-                                        <connections>
-                                            <segue destination="pFE-yf-YcZ" kind="show" identifier="DetailSegue" id="82e-r9-f9b"/>
-                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -68,9 +65,16 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Opb-dP-eEq"/>
+                    <navigationItem key="navigationItem" id="Opb-dP-eEq">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="sNB-xR-6oi">
+                            <connections>
+                                <action selector="addItems" destination="BYZ-38-t0r" id="uU8-TV-GVJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="yEG-cT-skF" id="S85-Kc-upE"/>
+                        <segue destination="pFE-yf-YcZ" kind="show" identifier="DetailSegue" id="xGd-NU-Yot"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -105,7 +109,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qs1-AP-ebl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1812" y="26.53673163418291"/>
+            <point key="canvasLocation" x="1263" y="33"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xiW-GU-8bc">

@@ -19,17 +19,36 @@ class ViewController: UIViewController {
         let width = (view.frame.size.width - 20) / 3
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: width, height: width)
+        
+        let refresh = UIRefreshControl()
+        refresh.addTarget(self, action: #selector(self.refresh), for: UIControlEvents.valueChanged)
+        collectionView.refreshControl = refresh
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DetailSegue" {
             if let dest = segue.destination as? DetailsViewController,
-                let index = collectionView.indexPathsForSelectedItems?.first {
+                let index = sender as? IndexPath {
                 dest.selection = collectionData[index.row]
             }
         }
     }
+
+    @IBAction func addItems() {
+        for _ in 0..<2 {
+            collectionView.performBatchUpdates({
+                let text = "\(collectionData.count - 1) 🐱"
+                collectionData.append(text)
+                let index = IndexPath(row: collectionData.count - 1, section: 0)
+                collectionView.insertItems(at: [index])
+            }, completion: nil)
+        }
+    }
     
+    @objc func refresh() {
+        addItems()
+        collectionView.refreshControl?.endRefreshing()
+    }
 }
 
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -47,7 +66,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        performSegue(withIdentifier: "DetailSegue", sender: indexPath)
     }
     
     
