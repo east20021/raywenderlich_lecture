@@ -12,6 +12,7 @@
 		9BF283FC2034000F00730DC6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BF283FA2034000F00730DC6 /* Main.storyboard */; };
 		9BF283FE2034000F00730DC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BF283FD2034000F00730DC6 /* Assets.xcassets */; };
 		9BF284012034000F00730DC6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BF283FF2034000F00730DC6 /* LaunchScreen.storyboard */; };
+		9BF28409203413E500730DC6 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF28408203413E500730DC6 /* DetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		9BF283FD2034000F00730DC6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9BF284002034000F00730DC6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9BF284022034000F00730DC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9BF28408203413E500730DC6 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				9BF283F62034000F00730DC6 /* AppDelegate.swift */,
 				9BF283F82034000F00730DC6 /* ViewController.swift */,
+				9BF28408203413E500730DC6 /* DetailsViewController.swift */,
 				9BF283FA2034000F00730DC6 /* Main.storyboard */,
 				9BF283FD2034000F00730DC6 /* Assets.xcassets */,
 				9BF283FF2034000F00730DC6 /* LaunchScreen.storyboard */,
@@ -138,6 +141,7 @@
 			files = (
 				9BF283F92034000F00730DC6 /* ViewController.swift in Sources */,
 				9BF283F72034000F00730DC6 /* AppDelegate.swift in Sources */,
+				9BF28409203413E500730DC6 /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
