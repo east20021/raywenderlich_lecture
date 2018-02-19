@@ -26,6 +26,7 @@ class ViewController: UIViewController {
         refresh.addTarget(self, action: #selector(self.refresh), for: UIControlEvents.valueChanged)
         collectionView.refreshControl = refresh
         navigationItem.leftBarButtonItem = editButtonItem
+        navigationController?.isToolbarHidden = true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -59,6 +60,7 @@ class ViewController: UIViewController {
             }, completion: nil)
         }
     }
+    
     @IBAction func deleteSelected(_ sender: Any) {
         if let selected = collectionView.indexPathsForSelectedItems {
             let items = selected.map{$0.item}.sorted().reversed()
@@ -66,9 +68,9 @@ class ViewController: UIViewController {
                 collectionData.remove(at: item)
             }
             collectionView.deleteItems(at: selected)
+            navigationController?.isToolbarHidden = true
         }
     }
-    
     
     @objc func refresh() {
         addItems()
@@ -92,6 +94,17 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if !isEditing {
             performSegue(withIdentifier: "DetailSegue", sender: indexPath)
+        } else {
+            navigationController?.isToolbarHidden = false
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if isEditing {
+            if let selected = collectionView.indexPathsForSelectedItems,
+                selected.count == 0 {
+                navigationController?.isToolbarHidden = true
+            }
         }
     }
     
