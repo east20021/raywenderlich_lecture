@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,7 +29,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewCell" id="q3P-up-ciY">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewCell" id="q3P-up-ciY" customClass="CollectionViewCell" customModule="Getting_Started" customModuleProvider="target">
                                         <rect key="frame" x="87.5" y="0.0" width="200" height="200"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -41,13 +42,26 @@
                                                     <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Unchecked" translatesAutoresizingMaskIntoConstraints="NO" id="buN-og-aYm">
+                                                    <rect key="frame" x="170" y="170" width="22" height="22"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="22" id="cxc-FM-7J0"/>
+                                                        <constraint firstAttribute="width" constant="22" id="zRX-3e-Fcf"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="buN-og-aYm" secondAttribute="bottom" constant="8" id="3aC-Jr-KPH"/>
+                                            <constraint firstAttribute="trailing" secondItem="buN-og-aYm" secondAttribute="trailing" constant="8" id="8Vr-7t-obb"/>
                                             <constraint firstItem="i9t-lq-vxZ" firstAttribute="centerX" secondItem="q3P-up-ciY" secondAttribute="centerX" id="aJV-HP-cLp"/>
                                             <constraint firstItem="i9t-lq-vxZ" firstAttribute="centerY" secondItem="q3P-up-ciY" secondAttribute="centerY" id="i1n-n6-ISx"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="selectionImage" destination="buN-og-aYm" id="2ec-QS-JvA"/>
+                                            <outlet property="titleLabel" destination="i9t-lq-vxZ" id="ccq-1O-2Qh"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -66,14 +80,23 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="Opb-dP-eEq">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="sNB-xR-6oi">
-                            <connections>
-                                <action selector="addItems" destination="BYZ-38-t0r" id="uU8-TV-GVJ"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="sNB-xR-6oi">
+                                <connections>
+                                    <action selector="addItems" destination="BYZ-38-t0r" id="uU8-TV-GVJ"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem enabled="NO" systemItem="trash" id="Np0-cH-YuO">
+                                <connections>
+                                    <action selector="deleteSelected:" destination="BYZ-38-t0r" id="tWG-Bq-f5O"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="addButton" destination="sNB-xR-6oi" id="dTu-dq-yQA"/>
                         <outlet property="collectionView" destination="yEG-cT-skF" id="S85-Kc-upE"/>
+                        <outlet property="deleteButton" destination="Np0-cH-YuO" id="GNp-ym-K6v"/>
                         <segue destination="pFE-yf-YcZ" kind="show" identifier="DetailSegue" id="xGd-NU-Yot"/>
                     </connections>
                 </viewController>
@@ -130,4 +153,7 @@
             <point key="canvasLocation" x="-370" y="27"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Unchecked" width="22" height="22"/>
+    </resources>
 </document>

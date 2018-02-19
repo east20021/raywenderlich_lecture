@@ -10,7 +10,9 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var addButton: UIBarButtonItem!
     
     var collectionData = ["1 🍏", "2 🍎", "3 🍐", "4 🍊", "5 🍋", "6 🍌", "7 🍉", "8 🍇", "9 🍓", "10 🍈", "11 🍒", "12 🍑"]
 
@@ -23,6 +25,7 @@ class ViewController: UIViewController {
         let refresh = UIRefreshControl()
         refresh.addTarget(self, action: #selector(self.refresh), for: UIControlEvents.valueChanged)
         collectionView.refreshControl = refresh
+        navigationItem.leftBarButtonItem = editButtonItem
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -31,6 +34,18 @@ class ViewController: UIViewController {
                 let index = sender as? IndexPath {
                 dest.selection = collectionData[index.row]
             }
+        }
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: true)
+        deleteButton.isEnabled = editing
+        addButton.isEnabled = !editing
+        collectionView.allowsMultipleSelection = editing
+        let indexes = collectionView.indexPathsForVisibleItems
+        for index in indexes {
+            let cell = collectionView.cellForItem(at: index) as! CollectionViewCell
+            cell.isEditing = editing
         }
     }
 
@@ -44,6 +59,16 @@ class ViewController: UIViewController {
             }, completion: nil)
         }
     }
+    @IBAction func deleteSelected(_ sender: Any) {
+        if let selected = collectionView.indexPathsForSelectedItems {
+            let items = selected.map{$0.item}.sorted().reversed()
+            for item in items {
+                collectionData.remove(at: item)
+            }
+            collectionView.deleteItems(at: selected)
+        }
+    }
+    
     
     @objc func refresh() {
         addItems()
@@ -58,15 +83,16 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     //셀 구성
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath)
-        if let label = cell.viewWithTag(100) as? UILabel {
-            label.text = collectionData[indexPath.row]
-        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
+        cell.titleLabel.text = collectionData[indexPath.row]
+        cell.isEditing = isEditing
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "DetailSegue", sender: indexPath)
+        if !isEditing {
+            performSegue(withIdentifier: "DetailSegue", sender: indexPath)
+        }
     }
     
     
